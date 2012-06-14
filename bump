@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+VER_FILE='src/config.h'
+
+MAJOR=`sed 's/\(^.*\)\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*$\)/\2/g' < ${VER_FILE}`
+MINOR=`sed 's/\(^.*\)\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*$\)/\3/g' < ${VER_FILE}`
+BUGFIX=`sed 's/\(^.*\)\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*$\)/\4/g' < ${VER_FILE}`
+
+MSG=${MAJOR}'.'${MINOR}'.'${BUGFIX}' > '
+
+while getopts ":Mmbh" ${ARGV} opt; do
+   case $opt in
+      M)
+         ((MAJOR=MAJOR+1))
+         ;;
+      m)
+         ((MINOR=MINOR+1))
+         ;;
+      b)
+         ((BUGFIX=BUGFIX+1))
+         ;;
+      h)
+         echo "Available options:" >&2
+         echo "  -M bump Major version" >&2
+         echo "  -m bump minor version" >&2
+         echo "  -b bump bugfix version" >&2
+         ;;
+      \?)
+         echo "Invalid option: -$OPTARG" >&2
+         ;;
+   esac
+done
+
+echo ${MSG}${MAJOR}'.'${MINOR}'.'${BUGFIX}
+
+sed -i 's/\(^.*\)\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*$\)/\1'${MAJOR}'.'${MINOR}'.'${BUGFIX}'\5/g' ${VER_FILE}
+git add ${VER_FILE}
+git commit --verbose
