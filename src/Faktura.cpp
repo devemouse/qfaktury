@@ -16,7 +16,7 @@
 #include "TowaryLista.h"
 #include "ZmienIlosc.h"
 #include "CustomPayment.h"
-#include "MainWindow.h"
+#include "old_MainWindow.h"
 #include "Kontrahenci.h"
 #include "IDataLayer.h"
 
@@ -222,7 +222,7 @@ void Faktura::discountChange() {
 void Faktura::addTow() {
 	TowaryLista twWindow(this);
 	if (twWindow.exec() == QDialog::Accepted) {
-		MainWindow::insertRow(tableTow, tableTow->rowCount());
+  old_MainWindow::insertRow(tableTow, tableTow->rowCount());
 		// qDebug() << twWindow.ret;
 		QStringList row = twWindow.ret.split("|");
 		int rowNum = tableTow->rowCount() - 1;

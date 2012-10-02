@@ -8,12 +8,12 @@
 #include "IDataLayer.h"
 
 
-class MainWindow: public QMainWindow, public Ui::MainWindow {
+class old_MainWindow: public QMainWindow, public Ui::old_MainWindow {
 
 Q_OBJECT
 public:
-	MainWindow(QWidget *parent);
-	~MainWindow();
+    old_MainWindow(QWidget *parent);
+    ~old_MainWindow();
 	static void insertRow(QTableWidget *t, int row);
 
 	IDataLayer *dl;
@@ -65,5 +65,7 @@ private:
 	void readTw();
 protected:
 	virtual void loadPlugins();
+private slots:
+    void on_PrevMonthButton_clicked();
 };
 #endif

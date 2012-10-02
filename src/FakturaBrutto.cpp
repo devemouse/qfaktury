@@ -8,7 +8,7 @@
 #include "moc_FakturaBrutto.cpp"
 
 #include "TowaryBruttoLista.h"
-#include "MainWindow.h"
+#include "old_MainWindow.h"
 
 // constructor
 FakturaBrutto::FakturaBrutto(QWidget *parent, IDataLayer *dl): Faktura(parent, dl) {
@@ -66,7 +66,7 @@ void FakturaBrutto::calculateOneDiscount(int i) {
 void FakturaBrutto::addTow() {
 	TowaryBruttoLista twWindow(this);
 	if (twWindow.exec() == QDialog::Accepted) {
-		MainWindow::insertRow(tableTow, tableTow->rowCount());
+		old_MainWindow::insertRow(tableTow, tableTow->rowCount());
 		// qDebug() << twWindow->ret;
 		QStringList row = twWindow.ret.split("|");
 		int rowNum = tableTow->rowCount() - 1;

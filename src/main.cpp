@@ -6,7 +6,7 @@
 #include <QTranslator>
 #include <QWaitCondition>
 
-#include "MainWindow.h"
+#include "old_MainWindow.h"
 #include "Settings.h"
 
 // do splasha
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 
 	QSplashScreen splash(QPixmap(":/res/icons/splash.png"));
 
-	MainWindow w(0);
+    old_MainWindow w(0);
 	w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
 
 

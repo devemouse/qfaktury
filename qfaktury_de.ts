@@ -942,7 +942,7 @@
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>old_MainWindow</name>
     <message>
         <location filename="src/MainWindow.cpp" line="425"/>
         <location filename="src/MainWindow.cpp" line="452"/>

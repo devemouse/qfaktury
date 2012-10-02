@@ -1,4 +1,4 @@
-#include "moc_MainWindow.cpp"
+#include "moc_old_MainWindow.cpp"
 #include <QTextCodec>
 #include <QMessageBox>
 #include <QApplication>
@@ -29,21 +29,21 @@
 
 /** Constructor
  */
-MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
+old_MainWindow::old_MainWindow(QWidget *parent): QMainWindow(parent) {
     setupUi(this);
     init();
 }
 
 /** Destructor
  */
-MainWindow::~MainWindow() {
+old_MainWindow::~old_MainWindow() {
 	saveAllSett();
 }
 
 /**
  * init() method
  */
-void MainWindow::init() {
+void old_MainWindow::init() {
 
 	// first run
 	if (firstRun()) {
@@ -152,7 +152,7 @@ void MainWindow::init() {
 /**
  *  Loads PyQt plugins
  */
-void MainWindow::loadPlugins() {
+void old_MainWindow::loadPlugins() {
 	QDir allFiles;
 	QString text, path;
 	path = sett().getWorkingDir() + "/plugins/";
@@ -178,13 +178,18 @@ void MainWindow::loadPlugins() {
 		}
 	}
 	menuPlugins->addSeparator();
-	menuPlugins->addAction(trUtf8("Informacje"), this, SLOT (pluginInfoSlot()));
+    menuPlugins->addAction(trUtf8("Informacje"), this, SLOT (pluginInfoSlot()));
+}
+
+void old_MainWindow::on_PrevMonthButton_clicked()
+{
+
 }
 
 /**
  * firstRun setup()
  */
-bool MainWindow::firstRun() {
+bool old_MainWindow::firstRun() {
 	bool ok = sett().value("firstrun", true).toBool();
 	// qDebug() << "firstRun" << ok;
 	if (ok) {
@@ -203,7 +208,7 @@ bool MainWindow::firstRun() {
 /** save sett() before quit
  * save column width
  */
-void MainWindow::saveColumnWidth() {
+void old_MainWindow::saveColumnWidth() {
 	// width of the columns in the towary "goods" tab
 	sett().setValue("towCol0", tableT->columnWidth(0));
 	sett().setValue("towCol1", tableT->columnWidth(1));
@@ -234,14 +239,14 @@ void MainWindow::saveColumnWidth() {
 
 /** Saves all sett() as default - first run
  */
-void MainWindow::saveAllSettAsDefault() {
+void old_MainWindow::saveAllSettAsDefault() {
 	sett().resetSettings();
 }
 
 
 /** Saves all sett()
  */
-void MainWindow::saveAllSett() {
+void old_MainWindow::saveAllSett() {
 	// save filtr
 	sett().setValue("filtrStart", filtrStart->date());
 	sett().setValue("filtrEnd", filtrEnd->date());
@@ -256,14 +261,14 @@ void MainWindow::saveAllSett() {
 /** Clears content of the QTableWidget passed in the input
  *  @param QTableWidget
  */
-void MainWindow::tableClear(QTableWidget * tab) {
+void old_MainWindow::tableClear(QTableWidget * tab) {
 	// should be a better method to do that
 	tab->setRowCount(0);
 }
 
 /** Used while adding new row
  */
-void MainWindow::insertRow(QTableWidget *t, int row) {
+void old_MainWindow::insertRow(QTableWidget *t, int row) {
 	t->insertRow(row);
 	for (int i = 0; i < t->columnCount(); i++) {
 		t->setItem(row, i, new QTableWidgetItem());
@@ -273,7 +278,7 @@ void MainWindow::insertRow(QTableWidget *t, int row) {
 /** Reads the invoices from the directory passed in the input.
  *  @param QString - directory from where the invoices should be read
  */
-void MainWindow::readHist() {
+void old_MainWindow::readHist() {
 	QVector<InvoiceData> invoicesVec;
 	invoicesVec = dl->invoiceSelectAllData(filtrStart->date(), filtrEnd->date());
 	tableH->setSortingEnabled(false);
@@ -297,7 +302,7 @@ void MainWindow::readHist() {
 
 /** Reads customers from the XML
  */
-void MainWindow::readKontr() {
+void old_MainWindow::readKontr() {
 	tableClear(tableK);
 	tableK->setSortingEnabled(false);
 	QVector<KontrData> kontrVec = dl->kontrahenciSelectAllData();
@@ -320,7 +325,7 @@ void MainWindow::readKontr() {
 
 /** Reads goods from the XML
  */
-void MainWindow::readTw() {
+void old_MainWindow::readTw() {
 	tableClear(tableT);
 	QVector<ProductData> prodVec = dl->productsSelectAllData();
 	for (int i = 0; i < prodVec.size(); ++i) {
@@ -357,7 +362,7 @@ void MainWindow::readTw() {
 
 /** Creates directories if required
  */
-void MainWindow::setupDir() {
+void old_MainWindow::setupDir() {
 	workingDir = sett().getWorkingDir();
 	QDir dir(workingDir);
 	if (!dir.exists(sett().getDataDir()))
@@ -367,7 +372,7 @@ void MainWindow::setupDir() {
 
 // ----------------------------------------  SLOTS ---------------------------------//
 
-void MainWindow::keyPressEvent(QKeyEvent * event) {
+void old_MainWindow::keyPressEvent(QKeyEvent * event) {
 	// qDebug() << __FUNCTION__;
 	// for now not really used could be deleted
 	if (event->key() == Qt::Key_F5) {
@@ -411,7 +416,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event) {
 /** Slot
  *  Just show the message.
  */
-void MainWindow::pluginInfoSlot() {
+void old_MainWindow::pluginInfoSlot() {
 	QMessageBox::information(this, trUtf8("QFaktury"),
 			trUtf8("To menu służy do obsługi pluginów pythona, \n np. archiwizacji danych, generowania raportów etc.\n\n") +
 			trUtf8("Skrypty pythona sa czytane z folderu \"~/elinux/plugins/\"."),
@@ -422,7 +427,7 @@ void MainWindow::pluginInfoSlot() {
 /** Slot
  *  Used while calling python script from the menu
  */
-void MainWindow::pluginSlot() {
+void old_MainWindow::pluginSlot() {
 
 	QString program = "python";
 
@@ -447,7 +452,7 @@ void MainWindow::pluginSlot() {
 /** Slot
  *  Show context menu
  */
-void MainWindow::showTableMenuT(QPoint p) {
+void old_MainWindow::showTableMenuT(QPoint p) {
 	// qDebug() << __FUNCTION__ << __LINE__;
 	QMenu menuTableT(tableT);
 	menuTableT.addAction(towaryDodajAction);
@@ -460,7 +465,7 @@ void MainWindow::showTableMenuT(QPoint p) {
 /** Slot
  *  Show context menu
  */
-void MainWindow::showTableMenuK(QPoint p) {
+void old_MainWindow::showTableMenuK(QPoint p) {
 	// qDebug() << __FUNCTION__ << __LINE__;
 	QMenu menuTable(tableK);
 	menuTable.addAction(kontrahenciDodajAction);
@@ -473,7 +478,7 @@ void MainWindow::showTableMenuK(QPoint p) {
 /** Slot
  *  Show context menu
  */
-void MainWindow::showTableMenuH(QPoint p) {
+void old_MainWindow::showTableMenuH(QPoint p) {
 	// qDebug() << __FUNCTION__ << __LINE__;
 	QMenu menuTable(tableH);
 	menuTable.addAction(fakturyDodajAction);
@@ -492,11 +497,11 @@ void MainWindow::showTableMenuH(QPoint p) {
 /** Slot
  *  StatusBar slot
  */
-void MainWindow::mainUpdateStatus(QTableWidgetItem *item) {
+void old_MainWindow::mainUpdateStatus(QTableWidgetItem *item) {
 
-	// cast is required since the names of method and objects inside MainWindow class and
-	// QMainWindow and UiMainWindow are the same... I guess there is a way to avoid it.
-	QStatusBar* stat = dynamic_cast<QMainWindow *>(this)->statusBar();
+    // cast is required since the names of method and objects inside old_MainWindow class and
+    // Qold_MainWindow and Uiold_MainWindow are the same... I guess there is a way to avoid it.
+    QStatusBar* stat = dynamic_cast<QMainWindow *>(this)->statusBar();
 
 	QTableWidget *table = item->tableWidget();
 	QString message;
@@ -510,7 +515,7 @@ void MainWindow::mainUpdateStatus(QTableWidgetItem *item) {
 /** Slot which enables/disables menu. It's possible to add/remove goods/customers
  *  only if this is the current tab.
  */
-void MainWindow::tabChanged(QWidget * qwdt) {
+void old_MainWindow::tabChanged(QWidget * qwdt) {
 
 	int tabNo = tabWidget2->indexOf(qwdt);
 
@@ -561,7 +566,7 @@ void MainWindow::tabChanged(QWidget * qwdt) {
 
 /** Slot used to read the invoices, calls readHist.
  */
-void MainWindow::rereadHist() {
+void old_MainWindow::rereadHist() {
 	//  qDebug( __FUNCTION__ );
 	tableClear(tableH);
 	tableH->setSortingEnabled(false);
@@ -570,13 +575,13 @@ void MainWindow::rereadHist() {
 
 /** Slot used to display aboutQt informations.
  */
-void MainWindow::aboutQt() {
+void old_MainWindow::aboutQt() {
 	QMessageBox::aboutQt(this, sett().getVersion(qAppName()));
 }
 
 /** Slot used to display information about QFaktury
  */
-void MainWindow::oProg() {
+void old_MainWindow::oProg() {
 	QMessageBox::about(
 			this,
 			trUtf8("O programie"),
@@ -594,7 +599,7 @@ void MainWindow::oProg() {
 
 /** Slot used to edit the invoice from list of invoices.
  */
-void MainWindow::editFHist() {
+void old_MainWindow::editFHist() {
 	if (tableH->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Faktura nie wybrana. Nie mozna edytować."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -683,7 +688,7 @@ void MainWindow::editFHist() {
 
 /** Slot used to delete invoices
  */
-void MainWindow::delFHist() {
+void old_MainWindow::delFHist() {
 	if (tableH->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Faktura nie wybrana. Nie mozna usuwać."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -700,7 +705,7 @@ void MainWindow::delFHist() {
 
 /** Slot used to edit data of the current company
  */
-void MainWindow::daneFirmyClick() {
+void old_MainWindow::daneFirmyClick() {
 	// qDebug("%s %s:%d", __FUNCTION__, __FILE__, __LINE__);
 	Uzytkownik daneFirmyWindow(this);
 	daneFirmyWindow.exec();
@@ -708,7 +713,7 @@ void MainWindow::daneFirmyClick() {
 
 /** Slot used to edit edit sett()
  */
-void MainWindow::settClick() {
+void old_MainWindow::settClick() {
 	// qDebug ("%s %s:%d", __FUNCTION__, __FILE__, __LINE__);
 	Ustawienia settWindow(this);
 	settWindow.exec();
@@ -716,7 +721,7 @@ void MainWindow::settClick() {
 
 /** Slot used to add new customer
  */
-void MainWindow::kontrClick() {
+void old_MainWindow::kontrClick() {
 	Kontrahenci kontrWindow(this, 0, dl);
 	//qDebug ("%s %s:%d", __FUNCTION__, __FILE__, __LINE__);
 	if (kontrWindow.exec() == QDialog::Accepted) {
@@ -734,7 +739,7 @@ void MainWindow::kontrClick() {
 
 /** Slot used to delete current customer
  */
-void MainWindow::kontrDel() {
+void old_MainWindow::kontrDel() {
 	if (tableK->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Kontrahent nie wybrany. Nie mozna usuwac."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -749,7 +754,7 @@ void MainWindow::kontrDel() {
 
 /** Slot used to edit customer
  */
-void MainWindow::kontrEd() {
+void old_MainWindow::kontrEd() {
 	if (tableK->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Kontrahent nie wybrany."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -775,7 +780,7 @@ void MainWindow::kontrEd() {
 
 /** Slot used for creating new invoices
  */
-void MainWindow::newFra() {
+void old_MainWindow::newFra() {
 	Faktura fraWindow(this, dl);
 	fraWindow.pforma = false;
 	if (fraWindow.exec() == QDialog::Accepted) {
@@ -799,7 +804,7 @@ void MainWindow::newFra() {
 
 /** Slot used for creating new invoices
  */
-void MainWindow::newFRachunek() {
+void old_MainWindow::newFRachunek() {
 	Rachunek fraWindow(this, dl);
 	fraWindow.pforma = false;
 	fraWindow.setWindowTitle(trUtf8("Rachunek"));
@@ -825,7 +830,7 @@ void MainWindow::newFRachunek() {
 
 /** Slot used for creating new invoices
  */
-void MainWindow::newFBrutto() {
+void old_MainWindow::newFBrutto() {
 	FakturaBrutto fraWindow(this, dl);
 	fraWindow.pforma = false;
 	fraWindow.setWindowTitle(trUtf8("Faktura VAT Brutto"));
@@ -850,7 +855,7 @@ void MainWindow::newFBrutto() {
 
 /** Slot used to create new ProForma Invoice
  */
-void MainWindow::newPForm() {
+void old_MainWindow::newPForm() {
 	Faktura fraWindow(this, dl);
 	fraWindow.pforma = true;
 	fraWindow.setWindowTitle(trUtf8("Faktura Pro Forma"));
@@ -875,7 +880,7 @@ void MainWindow::newPForm() {
 
 /** Slot used to create new Korkta
  */
-void MainWindow::newKor() {
+void old_MainWindow::newKor() {
 	if (tableH->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Faktura nie wybrana. Wybierz fakurę, do której chcesz wystawić korektę."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -927,7 +932,7 @@ void MainWindow::newKor() {
 /** Slot
  *  Creates duplicate
  */
-void MainWindow::newDuplikat() {
+void old_MainWindow::newDuplikat() {
 	if (tableH->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Faktura nie wybrana. Wybierz fakurę, do której chcesz wystawić duplikat."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -957,7 +962,7 @@ void MainWindow::newDuplikat() {
 
 /** Slot used to add goods
  */
-void MainWindow::towaryDodaj() {
+void old_MainWindow::towaryDodaj() {
 	Towary towWindow(this, 0, dl);
 	if (towWindow.exec() == QDialog::Accepted) {
 		tableT->setSortingEnabled(false);
@@ -981,7 +986,7 @@ void MainWindow::towaryDodaj() {
 
 /** Slot used to delete goods
  */
-void MainWindow::towaryUsun() {
+void old_MainWindow::towaryUsun() {
 	if (tableT->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Towar nie wybrany. Nie mozna usuwac."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -1000,7 +1005,7 @@ void MainWindow::towaryUsun() {
 
 /** Slot used for editing goods
  */
-void MainWindow::towaryEdycja() {
+void old_MainWindow::towaryEdycja() {
 	if (tableT->selectedItems().count() <= 0) {
 		QMessageBox::information(this, trUtf8("QFaktury"), trUtf8("Towar nie wybrany. Nie można edytować."), trUtf8("Ok"), 0, 0, 1);
 		return;
@@ -1032,12 +1037,12 @@ void MainWindow::towaryEdycja() {
 
 /** Slot close
  */
-bool MainWindow::close() {
+bool old_MainWindow::close() {
 	if (QMessageBox::question(this, trUtf8("Potwierdź"),
 	trUtf8("Czy chcesz wyjść z programu?"), QMessageBox::Yes | QMessageBox::No,
 			QMessageBox::Yes) == QMessageBox::Yes) {
 		saveAllSett();
-		return QMainWindow::close();
+        return QMainWindow::close();
 	} else {
 		return false;
 	}
@@ -1045,18 +1050,18 @@ bool MainWindow::close() {
 
 /** Slot help
  */
-void MainWindow::pomoc() {
+void old_MainWindow::pomoc() {
 	QDesktopServices::openUrl(QUrl("http://www.e-linux.pl/"));
 }
 
 /** Slot reportBug
  */
-void MainWindow::reportBug() {
+void old_MainWindow::reportBug() {
 	QDesktopServices::openUrl(QUrl("https://sourceforge.net/tracker2/?func=add&group_id=154610&atid=792471"));
 }
 
 // slot for resetting the filters
-void MainWindow::resetFilter() {
+void old_MainWindow::resetFilter() {
 	filtrStart->setDate(sett().getFirstDayOfYear());
 	filtrEnd->setDate(sett().getLastDayOfYear());
 	rereadHist();

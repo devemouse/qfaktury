@@ -27,7 +27,7 @@ HEADERS += ./src/XmlDataLayer.h \
     ./src/Kontrahenci.h \
     ./src/KontrahenciLista.h \
     ./src/Korekta.h \
-    ./src/MainWindow.h \
+    ./src/old_MainWindow.h \
     ./src/ProductData.h \
     ./src/Settings.h \
     ./src/Towary.h \
@@ -39,7 +39,7 @@ FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
     ./ui/KontrahenciLista.ui \
-    ./ui/MainWindow.ui \
+    ./ui/old_MainWindow.ui \
     ./ui/Towary.ui \
     ./ui/TowaryLista.ui \
     ./ui/Ustawienia.ui \
@@ -60,7 +60,7 @@ SOURCES += ./src/XmlDataLayer.cpp \
     ./src/KontrahenciLista.cpp \
     ./src/Korekta.cpp \
     ./src/main.cpp \
-    ./src/MainWindow.cpp \
+    ./src/old_MainWindow.cpp \
     ./src/Towary.cpp \
     ./src/TowaryLista.cpp \
     ./src/Ustawienia.cpp \
