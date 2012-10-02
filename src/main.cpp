@@ -33,16 +33,16 @@ int main(int argc, char **argv) {
 	w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
 
 
-	if (a.arguments().contains("--nosplash")) {
+        //if (a.arguments().contains("--nosplash")) {
 		w.show();
-	} else {
+        /*} else {
 		splash.show();
 
 		a.processEvents();
 
 		QTimer::singleShot(5000, &w, SLOT(show()));
 		QTimer::singleShot(4960, &splash, SLOT(close()));
-	}
+        }*/
 
 	a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
 #include <windows.h>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine, int nCmdShow) {
-	main(0,0);
+    return main(0,0);
 }
 #endif
 #endif

@@ -7,6 +7,9 @@
 
 #include "XmlDataLayer.h"
 #include "IDataLayer.h"
+#include <QDebug>
+#include <QtXml>
+#include <QtXmlPatterns/QXmlQuery>
 
 XmlDataLayer::XmlDataLayer():IDataLayer() {
 	// TODO Auto-generated constructor stub
@@ -790,24 +793,7 @@ InvoiceData XmlDataLayer::invoiceSelectData(QString name, int type) {
 
 	o_invData.discount = product.attribute("discount").toInt();
 
-	int towCount = product.attribute("productsCount").toInt();
-	int i = 0;
-	QDomElement towar;
-	towar = product.firstChild().toElement();
 
-	static const char *towarColumns[] = { "id", "name", "code", "PKWiU",
-			"quantity", "quantityType", "discount", "price", "nett",
-			"vatBucket", "gross" };
-
-	// tableTow->setRowCount(towCount);
-	for (i = 0; i < towCount; ++i) {
-		for (int j = 0; j < int(sizeof(towarColumns) / sizeof(*towarColumns)); j++) {
-			// tableTow->setItem(i, j, new QTableWidgetItem(towar.attribute(
-			//		towarColumns[j])));
-			// qDebug() << towarColumns[j] << towar.attribute(towarColumns[j]);
-		}
-		towar = towar.nextSibling().toElement();
-	}
 
 	tmp = tmp.toElement().nextSibling();
 	QDomElement additional = tmp.toElement();
@@ -836,7 +822,47 @@ InvoiceData XmlDataLayer::invoiceSelectData(QString name, int type) {
 	int curCurrency = sett().value("waluty").toString().split("|").indexOf(additional.attribute("currency"));
 	o_invData.currencyTypeId = curCurrency;
 
-	return o_invData;
+
+    QFile db(sett().getInvoicesDir() + name);
+
+    if (!db.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug("file doesn't exist");
+         return o_invData;
+    }
+
+    QXmlQuery query;
+    QString res;
+
+    query.setFocus(&db);
+    query.setQuery("//product");
+    if ( ! query.isValid())
+        return o_invData;
+
+    query.evaluateTo(&res);
+    db.close();
+
+    QDomDocument productsDOMDocument;
+    productsDOMDocument.setContent("" + res + "");
+    QDomNodeList products = productsDOMDocument.elementsByTagName("product");
+
+    for (int i = 0; i < products.count(); i++) {
+        QDomElement product = products.at(i).toElement();
+        o_invData.products[i] =
+                ProductData(product.attribute("id").toInt(),
+                            product.attribute("name"),
+                            product.attribute("code"),
+                            product.attribute("PKWiU"),
+                            product.attribute("quantity").toDouble(),
+                            product.attribute("quantityType"),
+                            product.attribute("discount").toDouble(),
+                            product.attribute("price").toDouble(),
+                            product.attribute("nett").toDouble(),
+                            product.attribute("vatBucket").toInt(),
+                            product.attribute("gross").toDouble(),
+                            additional.attribute("currency"));
+    }
+    return o_invData;
 }
 
 QVector<InvoiceData> XmlDataLayer::invoiceSelectAllData(QDate start, QDate end) {
@@ -959,8 +985,8 @@ bool XmlDataLayer::invoiceInsertData(InvoiceData& oi_invData, int type) {
 	products.setAttribute("discount", sett().numberToString(oi_invData.discount));
 
 	QMap<int, ProductData>::const_iterator i = oi_invData.products.constBegin();
-	int abc = 0;
-	while (i != oi_invData.products.constEnd()) {
+
+    while (i != oi_invData.products.constEnd()) {
 		product = doc.createElement("product");
 		// ProductData pr = i.value();
 		invoiceProdDataToElem(i.value(), product);

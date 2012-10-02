@@ -5,8 +5,7 @@ TEMPLATE = app
 TARGET = qfaktury
 DEPENDPATH += .
 INCLUDEPATH += .
-QT += gui \
-    xml
+QT += gui xml xmlpatterns
 CONFIG += debug
 
 # Input

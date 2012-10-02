@@ -3,3 +3,9 @@
 .cproject
 .settings
 *.autosave
+.moc
+.rcc
+.ui
+Makefile*
+*.Debug
+*.Release
