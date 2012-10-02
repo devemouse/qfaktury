@@ -1,4 +1,4 @@
-#include "src\MainWindow.h"
+#include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "InvoicesModel.h"
 

@@ -1,4 +1,4 @@
-#include "src\InvoicesModel.h"
+#include "InvoicesModel.h"
 #include <QDir>
 #include <QStringList>
 #include "Settings.h"
