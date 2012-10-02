@@ -3,7 +3,7 @@
 #include <QMainWindow>
 #include <QKeyEvent>
 #include "Settings.h"
-#include "ui_MainWindow.h"
+#include "ui_old_MainWindow.h"
 
 #include "IDataLayer.h"
 

@@ -7,6 +7,7 @@
 #include <QWaitCondition>
 
 #include "old_MainWindow.h"
+#include "MainWindow.h"
 #include "Settings.h"
 
 // do splasha
@@ -30,11 +31,14 @@ int main(int argc, char **argv) {
 	QSplashScreen splash(QPixmap(":/res/icons/splash.png"));
 
     old_MainWindow w(0);
+    MainWindow w2(0);
 	w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
+    w2.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
 
 
         //if (a.arguments().contains("--nosplash")) {
 		w.show();
+        w2.show();
         /*} else {
 		splash.show();
 
