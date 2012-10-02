@@ -34,7 +34,8 @@ HEADERS += ./src/XmlDataLayer.h \
     ./src/TowaryLista.h \
     ./src/Ustawienia.h \
     ./src/Uzytkownik.h \
-    ./src/ZmienIlosc.h
+    ./src/ZmienIlosc.h \
+    src/MainWindow.h
 FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
@@ -44,7 +45,8 @@ FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/TowaryLista.ui \
     ./ui/Ustawienia.ui \
     ./ui/Uzytkownik.ui \
-    ./ui/ZmienIlosc.ui
+    ./ui/ZmienIlosc.ui \
+    ui/MainWindow.ui
 SOURCES += ./src/XmlDataLayer.cpp \
     ./src/KontrData.cpp \
     ./src/CustomPaymData.cpp \
@@ -65,7 +67,8 @@ SOURCES += ./src/XmlDataLayer.cpp \
     ./src/TowaryLista.cpp \
     ./src/Ustawienia.cpp \
     ./src/Uzytkownik.cpp \
-    ./src/ZmienIlosc.cpp
+    ./src/ZmienIlosc.cpp \
+    src/MainWindow.cpp
 RESOURCES += qfaktury.qrc
 MOC_DIR = .moc
 UI_DIR = .ui
