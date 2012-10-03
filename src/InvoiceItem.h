@@ -20,26 +20,25 @@ public:
     static int columnCount(void) {return opt_num_fields;}
     static QString columnHeader(int column);
     
+    enum {
+        opt_filename,
+        opt_symbol,
+        opt_date,
+        opt_type,
+        opt_buyer,
+        opt_tic,
+        opt_amount,
+        opt_num_fields
+    };
+
 signals:
     
 public slots:
     
 private:
-
     QString runQuerry(QFile *file, QString querry);
     QList<QVariant> data;
     QDomNodeList products;
-
-    enum {
-        opt_filename,
-        opt_symbol,
-        opt_data,
-        opt_type,
-        opt_buyer,
-        opt_nip,
-        opt_amount,
-        opt_num_fields
-    };
 };
 
 #endif // INVOICEITEM_H

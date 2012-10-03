@@ -2,6 +2,7 @@
 #include <QDate>
 #include "config.h"
 #include "InvoiceDateFilterProxyModel.h"
+#include "InvoiceItem.h"
 
 InvoiceDateFilterProxyModel::InvoiceDateFilterProxyModel(QObject *parent) :
     QSortFilterProxyModel(parent)
@@ -25,22 +26,17 @@ void InvoiceDateFilterProxyModel::setFilterMaximumDate(const QDate &date)
 bool InvoiceDateFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
     F_TRACE;
-    QModelIndex date_index = sourceModel()->index(sourceRow, 2, sourceParent);
+    QModelIndex date_idx = sourceModel()->index(sourceRow, InvoiceItem::opt_date, sourceParent);
 
-    return (dateInRange(sourceModel()->data(date_index).toDate()));
-}
+    QModelIndex symbol_idx = sourceModel()->index(sourceRow, InvoiceItem::opt_symbol, sourceParent);
+    QModelIndex buyer_idx = sourceModel()->index(sourceRow, InvoiceItem::opt_buyer, sourceParent);
+    QModelIndex tic_idx = sourceModel()->index(sourceRow, InvoiceItem::opt_tic, sourceParent);
 
-bool InvoiceDateFilterProxyModel::lessThan(const QModelIndex &left, const QModelIndex &right) const
-{
-    F_TRACE;
-    QVariant leftData = sourceModel()->data(left);
-    QVariant rightData = sourceModel()->data(right);
 
-    if (leftData.type() == QVariant::DateTime) {
-        return leftData.toDateTime() < rightData.toDateTime();
-    } else {
-        return false;
-    }
+    return (sourceModel()->data(symbol_idx).toString().contains(filterRegExp())
+            || sourceModel()->data(buyer_idx).toString().contains(filterRegExp())
+            || sourceModel()->data(tic_idx).toString().contains(filterRegExp()))
+           && dateInRange(sourceModel()->data(date_idx).toDate());
 }
 
 bool InvoiceDateFilterProxyModel::dateInRange(const QDate &date) const

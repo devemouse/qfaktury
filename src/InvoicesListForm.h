@@ -27,6 +27,7 @@ private slots:
     void on_prev_month_button_clicked();
     void on_next_month_button_clicked();
     void goToToday(void);
+    void updateFilter(void);
 };
 
 #endif // INVOICESLISTFORM_H

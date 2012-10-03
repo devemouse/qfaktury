@@ -20,6 +20,8 @@ InvoicesListForm::InvoicesListForm(InvoicesModel *model, QWidget *parent) :
             proxyModel, SLOT(setFilterMaximumDate(QDate)));
     connect(ui->goToToday_pushButton, SIGNAL(clicked()),
             this, SLOT(goToToday()));
+    connect(ui->filter_lineEdit, SIGNAL(textChanged(QString)),
+            this, SLOT(updateFilter()));
 
     goToToday();
 }
@@ -52,4 +54,10 @@ void InvoicesListForm::goToToday()
     QDate now = QDate::currentDate();
     ui->to_dateEdit->setDate(now);
     ui->from_dateEdit->setDate(QDate(now.year(), now.month(), 1));
+}
+
+void InvoicesListForm::updateFilter()
+{
+    QRegExp regExp(ui->filter_lineEdit->text(), Qt::CaseInsensitive, QRegExp::Wildcard);
+    proxyModel->setFilterRegExp(regExp);
 }

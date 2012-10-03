@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
     w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
     w.show();
 
-#if 1
+#if 0
     old_MainWindow old_w(0);
     old_w.move(screen.center() - QPoint(old_w.width() / 2, old_w.height() / 2));
     old_w.show();
