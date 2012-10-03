@@ -38,10 +38,11 @@ HEADERS += ./src/XmlDataLayer.h \
     src/MainWindow.h \
     src/InvoicesModel.h \
     src/InvoiceItem.h \
-    src/InvoiceDateFilterProxyModel.h \
-    src/InvoicesListForm.h \
     src/helper_functions.h \
-    src/ContractorsModel.h
+    src/ContractorsModel.h \
+    src/DateFilterProxyModelWidget.h \
+    src/DateFilterProxyModel.h \
+    src/CustomTableView.h
 FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
@@ -53,7 +54,9 @@ FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Uzytkownik.ui \
     ./ui/ZmienIlosc.ui \
     ui/MainWindow.ui \
-    ui/invoiceslistform.ui
+    ui/DateFilterProxyModel.ui \
+    ui/DateFilterProxyModelWidget.ui \
+    ui/CustomTableView.ui
 SOURCES += ./src/XmlDataLayer.cpp \
     ./src/KontrData.cpp \
     ./src/CustomPaymData.cpp \
@@ -78,10 +81,11 @@ SOURCES += ./src/XmlDataLayer.cpp \
     src/MainWindow.cpp \
     src/InvoicesModel.cpp \
     src/InvoiceItem.cpp \
-    src/InvoiceDateFilterProxyModel.cpp \
-    src/InvoicesListForm.cpp \
     src/helper_functions.cpp \
-    src/ContractorsModel.cpp
+    src/ContractorsModel.cpp \
+    src/DateFilterProxyModelWidget.cpp \
+    src/DateFilterProxyModel.cpp \
+    src/CustomTableView.cpp
 RESOURCES += qfaktury.qrc
 MOC_DIR = .moc
 UI_DIR = .ui
@@ -104,3 +108,29 @@ INSTALLS += target \
     css \
     languages \
     desktop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

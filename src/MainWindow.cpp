@@ -5,7 +5,6 @@
 #include "ui_MainWindow.h"
 #include "InvoicesModel.h"
 #include "ContractorsModel.h"
-#include "InvoiceDateFilterProxyModel.h"
 #include "InvoicesListForm.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->setMargin(0);
     ui->history_tab->setLayout(layout);
 
-    InvoicesListForm *form = new InvoicesListForm(new InvoicesModel(this));
+    CustomTableView *form = new CustomTableView(new InvoicesModel(this));
+    form->addFilter(new DateFilterProxyModel(2,this));
     ui->history_tab->layout()->addWidget(form);
 
     layout = new QHBoxLayout(ui->contractors_tab);
@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->setMargin(0);
     ui->contractors_tab->setLayout(layout);
 
-    form = new InvoicesListForm(new ContractorsModel(this));
+    form = new CustomTableView(new ContractorsModel(this));
     ui->contractors_tab->layout()->addWidget(form);
 
 }
