@@ -30,15 +30,20 @@ int main(int argc, char **argv) {
 
 	QSplashScreen splash(QPixmap(":/res/icons/splash.png"));
 
-    old_MainWindow w(0);
-    MainWindow w2(0);
-	w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
-    w2.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
 
+    MainWindow w(0);
+    w.move(screen.center() - QPoint(w.width() / 2, w.height() / 2));
+    w.show();
+
+#if 1
+    old_MainWindow old_w(0);
+    old_w.move(screen.center() - QPoint(old_w.width() / 2, old_w.height() / 2));
+    old_w.show();
+#endif
 
         //if (a.arguments().contains("--nosplash")) {
-		w.show();
-        w2.show();
+
+
         /*} else {
 		splash.show();
 

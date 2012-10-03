@@ -15,90 +15,59 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>5</number>
+    </property>
     <item>
      <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+        <stylestrategy>PreferAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
       <property name="tabShape">
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
       <widget class="QWidget" name="history_tab">
        <attribute name="title">
         <string>History</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="prev_month_button">
-            <property name="text">
-             <string>&lt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="next_month_button">
-            <property name="text">
-             <string>&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="from_label">
-            <property name="text">
-             <string>From</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDateEdit" name="from_dateEdit"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="to_label">
-            <property name="text">
-             <string>To</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QDateEdit" name="to_dateEdit"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="apply_button">
-            <property name="text">
-             <string>Apply</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QTableView" name="invoices_tableView"/>
-        </item>
-       </layout>
       </widget>
       <widget class="QWidget" name="contractors_tab">
        <attribute name="title">
         <string>Contractors</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="historyi_tab">
+      <widget class="QWidget" name="items_tab">
        <attribute name="title">
-        <string>History</string>
+        <string>Items</string>
        </attribute>
       </widget>
      </widget>
@@ -126,7 +95,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionRun_old_MainWindow"/>
   </widget>
+  <action name="actionRun_old_MainWindow">
+   <property name="text">
+    <string>run_old_MainWindow</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

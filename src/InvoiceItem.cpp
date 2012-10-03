@@ -18,9 +18,12 @@ InvoiceItem::InvoiceItem(QObject *parent) :
 InvoiceItem::InvoiceItem(QString filename, QObject *parent) :
     QObject(parent)
 {
+    F_TRACE;
     data << filename;
 
     QFile invoice_file(sett().getInvoicesDir() + filename);
+
+    qDebug() << "Loading" << invoice_file.fileName();
 
     if (!invoice_file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -32,7 +35,7 @@ InvoiceItem::InvoiceItem(QString filename, QObject *parent) :
     products = productsDOMDocument.elementsByTagName("product");
 
     data << runQuerry(&invoice_file, "/invoice/@no/data(.)");
-    data << runQuerry(&invoice_file, "/invoice/@issueDate/data(.)");
+    data << QDate::fromString(runQuerry(&invoice_file, "/invoice/@issueDate/data(.)"), "dd/MM/yyyy");
     data << runQuerry(&invoice_file, "/invoice/@type/data(.)");
     data << runQuerry(&invoice_file, "/invoice/buyer/@name/data(.)");
     data << runQuerry(&invoice_file, "/invoice/buyer/@tic/data(.)");
@@ -45,6 +48,7 @@ InvoiceItem::InvoiceItem(QString filename, QObject *parent) :
 
 QVariant InvoiceItem::at(int column)
 {
+    F_TRACE;
     if (column < data.size())
         return data[column];
     else
@@ -53,6 +57,7 @@ QVariant InvoiceItem::at(int column)
 
 QString InvoiceItem::columnHeader(int column)
 {
+    F_TRACE;
     QStringList columns;
     columns << "Nazwa Pliku" << "Symbol" << "Data" << "Typ";
     columns << "Nabywca" << "Nip" << "Kwota";
@@ -61,6 +66,7 @@ QString InvoiceItem::columnHeader(int column)
 
 QString InvoiceItem::runQuerry(QFile *file, QString querry)
 {
+    F_TRACE;
     QXmlQuery query;
     QString res;
 
@@ -73,5 +79,5 @@ QString InvoiceItem::runQuerry(QFile *file, QString querry)
     }
 
     query.evaluateTo(&res);
-    return res;
+    return res.simplified();
 }

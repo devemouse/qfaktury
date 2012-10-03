@@ -23,16 +23,19 @@ InvoicesModel::InvoicesModel(QObject *parent) :
 
 int InvoicesModel::rowCount(const QModelIndex &parent) const
 {
+    F_TRACE;
     return allFiles.size();
 }
 
 int InvoicesModel::columnCount(const QModelIndex &parent) const
 {
+    F_TRACE;
     return InvoiceItem::columnCount();
 }
 
 QVariant InvoicesModel::data(const QModelIndex &index, int role) const
 {
+    F_TRACE;
     if (!index.isValid() || role != Qt::DisplayRole)
              return QVariant();
     return allFiles.at(index.row())->at(index.column());
@@ -40,6 +43,7 @@ QVariant InvoicesModel::data(const QModelIndex &index, int role) const
 
 QVariant InvoicesModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
+    F_TRACE;
     if (role != Qt::DisplayRole)
          return QVariant();
 
