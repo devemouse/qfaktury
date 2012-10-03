@@ -4,6 +4,7 @@
 #include "old_MainWindow.h"
 #include "ui_MainWindow.h"
 #include "InvoicesModel.h"
+#include "ContractorsModel.h"
 #include "InvoiceDateFilterProxyModel.h"
 #include "InvoicesListForm.h"
 
@@ -20,6 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     InvoicesListForm *form = new InvoicesListForm(new InvoicesModel(this));
     ui->history_tab->layout()->addWidget(form);
+
+    layout = new QHBoxLayout(ui->contractors_tab);
+    layout->setSpacing(0);
+    layout->setMargin(0);
+    ui->contractors_tab->setLayout(layout);
+
+    form = new InvoicesListForm(new ContractorsModel(this));
+    ui->contractors_tab->layout()->addWidget(form);
+
 }
 
 MainWindow::~MainWindow()

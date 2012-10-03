@@ -1,7 +1,7 @@
 #include "InvoicesListForm.h"
 #include "ui_invoiceslistform.h"
 
-InvoicesListForm::InvoicesListForm(InvoicesModel *model, QWidget *parent) :
+InvoicesListForm::InvoicesListForm(QAbstractTableModel *model, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InvoicesListForm)
 {
@@ -14,16 +14,16 @@ InvoicesListForm::InvoicesListForm(InvoicesModel *model, QWidget *parent) :
     ui->invoices_tableView->setModel(proxyModel);
     ui->invoices_tableView->verticalHeader()->setVisible(false);
 
-    connect(ui->from_dateEdit, SIGNAL(dateChanged(QDate)),
+  /*  connect(ui->from_dateEdit, SIGNAL(dateChanged(QDate)),
             proxyModel, SLOT(setFilterMinimumDate(QDate)));
     connect(ui->to_dateEdit, SIGNAL(dateChanged(QDate)),
             proxyModel, SLOT(setFilterMaximumDate(QDate)));
     connect(ui->goToToday_pushButton, SIGNAL(clicked()),
-            this, SLOT(goToToday()));
+            this, SLOT(goToToday()));*/
     connect(ui->filter_lineEdit, SIGNAL(textChanged(QString)),
             this, SLOT(updateFilter()));
 
-    goToToday();
+    //goToToday();
 }
 
 InvoicesListForm::~InvoicesListForm()

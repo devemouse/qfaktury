@@ -14,7 +14,7 @@ class InvoicesListForm : public QWidget
     Q_OBJECT
     
 public:
-    explicit InvoicesListForm(InvoicesModel *model, QWidget *parent = 0);
+    explicit InvoicesListForm(QAbstractTableModel *model, QWidget *parent = 0);
     ~InvoicesListForm();
     
 private:

@@ -1,6 +1,6 @@
 #define QFAKTURY_VERSION 0.6.7
 
-#define FUNC_TRACE
+//#define FUNC_TRACE
 
 
 

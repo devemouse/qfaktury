@@ -39,7 +39,9 @@ HEADERS += ./src/XmlDataLayer.h \
     src/InvoicesModel.h \
     src/InvoiceItem.h \
     src/InvoiceDateFilterProxyModel.h \
-    src/InvoicesListForm.h
+    src/InvoicesListForm.h \
+    src/helper_functions.h \
+    src/ContractorsModel.h
 FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
@@ -77,7 +79,9 @@ SOURCES += ./src/XmlDataLayer.cpp \
     src/InvoicesModel.cpp \
     src/InvoiceItem.cpp \
     src/InvoiceDateFilterProxyModel.cpp \
-    src/InvoicesListForm.cpp
+    src/InvoicesListForm.cpp \
+    src/helper_functions.cpp \
+    src/ContractorsModel.cpp
 RESOURCES += qfaktury.qrc
 MOC_DIR = .moc
 UI_DIR = .ui

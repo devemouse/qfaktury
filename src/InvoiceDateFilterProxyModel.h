@@ -10,12 +10,8 @@ class InvoiceDateFilterProxyModel : public QSortFilterProxyModel
 public:
     InvoiceDateFilterProxyModel(QObject *parent = 0);
 
-
     QDate filterMinimumDate() const { return minDate; }
-
-
     QDate filterMaximumDate() const { return maxDate; }
-
     
 signals:
     
@@ -31,7 +27,6 @@ private:
 
     QDate minDate;
     QDate maxDate;
-
 };
 
 #endif // INVOICEDATEFILTERPROXYMODEL_H

@@ -36,7 +36,6 @@ signals:
 public slots:
     
 private:
-    QString runQuerry(QFile *file, QString querry);
     QList<QVariant> data;
     QDomNodeList products;
 };
