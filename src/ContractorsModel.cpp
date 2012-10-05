@@ -8,9 +8,10 @@
 #include "Settings.h"
 #include "helper_functions.h"
 #include "ContractorsModel.h"
+#include "TextFilterProxyModel.h"
 
 ContractorsModel::ContractorsModel(QObject *parent) :
-    QAbstractTableModel(parent)
+    FilterAwareTableModel(parent)
 {
     QFile contractor_file(sett().getCustomersXml());
     qDebug() << "Loading" << contractor_file.fileName();
@@ -78,6 +79,25 @@ QVariant ContractorsModel::headerData(int section, Qt::Orientation orientation, 
             && section < sizeof(head_data)/sizeof(head_data[0]))
          return head_data[section];
      else
-         return QVariant();
+        return QVariant();
 
+}
+
+WidgetProxyModel *ContractorsModel::getTextFilter()
+{
+    QList<int> cols;
+
+    cols  << summary_name
+          << summary_city
+          << summary_city_code
+          << summary_address
+          << summary_tic
+          << summary_account
+          << summary_contractor_type
+          << summary_telephone
+          << summary_email
+          << summary_website
+          << summary_num_of_items;
+
+    return (new TextFilterProxyModel(cols));
 }

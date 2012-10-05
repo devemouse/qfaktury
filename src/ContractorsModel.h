@@ -4,8 +4,9 @@
 #include <QAbstractTableModel>
 #include <QList>
 #include <QVariant>
+#include "FilterAwareTableModel.h"
 
-class ContractorsModel : public QAbstractTableModel
+class ContractorsModel : public FilterAwareTableModel
 {
     Q_OBJECT
 public:
@@ -17,6 +18,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
+
+    WidgetProxyModel * getTextFilter();
 
     enum {
         summary_name,

@@ -5,8 +5,11 @@
 #include <QStringList>
 #include <QList>
 #include "InvoiceItem.h"
+#include "FilterAwareTableModel.h"
 
-class InvoicesModel : public QAbstractTableModel
+class QSortFilterProxyModel;
+
+class InvoicesModel : public FilterAwareTableModel
 {
     Q_OBJECT
 public:
@@ -18,6 +21,10 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const;
+
+    WidgetProxyModel * getDateFilter();
+    WidgetProxyModel * getTextFilter();
+
 
 signals:
     

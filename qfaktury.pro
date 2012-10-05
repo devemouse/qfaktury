@@ -42,7 +42,10 @@ HEADERS += ./src/XmlDataLayer.h \
     src/ContractorsModel.h \
     src/DateFilterProxyModelWidget.h \
     src/DateFilterProxyModel.h \
-    src/CustomTableView.h
+    src/CustomTableView.h \
+    src/FilterAwareTableModel.h \
+    src/WidgetProxyModel.h \
+    src/TextFilterProxyModel.h
 FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
@@ -85,7 +88,8 @@ SOURCES += ./src/XmlDataLayer.cpp \
     src/ContractorsModel.cpp \
     src/DateFilterProxyModelWidget.cpp \
     src/DateFilterProxyModel.cpp \
-    src/CustomTableView.cpp
+    src/CustomTableView.cpp \
+    src/TextFilterProxyModel.cpp
 RESOURCES += qfaktury.qrc
 MOC_DIR = .moc
 UI_DIR = .ui

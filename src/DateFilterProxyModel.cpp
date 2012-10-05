@@ -4,8 +4,16 @@
 #include "DateFilterProxyModelWidget.h"
 
 DateFilterProxyModel::DateFilterProxyModel(int column, QObject *parent) :
-    QSortFilterProxyModel(parent), column(column), widget(0)
+    WidgetProxyModel(parent), column(column)
 {
+    widget = new DateFilterProxyModelWidget(0);
+
+    connect(widget, SIGNAL(startDateChanged(QDate)),
+            this, SLOT(setFilterMinimumDate(QDate)));
+    connect(widget, SIGNAL(endDateChanged(QDate)),
+            this, SLOT(setFilterMaximumDate(QDate)));
+
+    widget->goToToday();
 }
 
 void DateFilterProxyModel::setFilterMinimumDate(const QDate &date)
@@ -40,16 +48,5 @@ bool DateFilterProxyModel::dateInRange(const QDate &date) const
 QWidget * DateFilterProxyModel::getWidget()
 {
     F_TRACE;
-    if (widget == 0)
-    {
-        widget = new DateFilterProxyModelWidget(0);
-
-        connect(widget, SIGNAL(startDateChanged(QDate)),
-                this, SLOT(setFilterMinimumDate(QDate)));
-        connect(widget, SIGNAL(endDateChanged(QDate)),
-                this, SLOT(setFilterMaximumDate(QDate)));
-
-        widget->goToToday();
-    }
     return widget;
 }

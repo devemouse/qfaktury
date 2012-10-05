@@ -3,10 +3,12 @@
 #include <QStringList>
 #include "Settings.h"
 #include "InvoiceItem.h"
+#include "DateFilterProxyModel.h"
+#include "TextFilterProxyModel.h"
 
 
 InvoicesModel::InvoicesModel(QObject *parent) :
-    QAbstractTableModel(parent)
+    FilterAwareTableModel(parent)
 {
     QDir invoices_dir;
 
@@ -51,4 +53,21 @@ QVariant InvoicesModel::headerData(int section, Qt::Orientation orientation, int
          return InvoiceItem::columnHeader(section);
      else
          return QVariant();
+}
+
+WidgetProxyModel *InvoicesModel::getDateFilter()
+{
+    return( new DateFilterProxyModel(InvoiceItem::opt_date));
+}
+
+WidgetProxyModel *InvoicesModel::getTextFilter()
+{
+    QList<int> cols;
+    cols << InvoiceItem::opt_symbol
+         << InvoiceItem::opt_type
+         << InvoiceItem::opt_buyer
+         << InvoiceItem::opt_tic
+         << InvoiceItem::opt_amount;
+
+    return (new TextFilterProxyModel(cols));
 }

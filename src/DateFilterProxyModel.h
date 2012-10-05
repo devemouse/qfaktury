@@ -4,10 +4,11 @@
 #include <QSortFilterProxyModel>
 #include <QDate>
 #include <QWidget>
+#include "WidgetProxyModel.h"
 class DateFilterProxyModelWidget;
 
 
-class DateFilterProxyModel : public QSortFilterProxyModel
+class DateFilterProxyModel : public WidgetProxyModel
 {
     Q_OBJECT
 public:

@@ -5,7 +5,7 @@
 #include "ui_MainWindow.h"
 #include "InvoicesModel.h"
 #include "ContractorsModel.h"
-#include "InvoicesListForm.h"
+#include "CustomTableView.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->history_tab->setLayout(layout);
 
     CustomTableView *form = new CustomTableView(new InvoicesModel(this));
-    form->addFilter(new DateFilterProxyModel(2,this));
     ui->history_tab->layout()->addWidget(form);
+
 
     layout = new QHBoxLayout(ui->contractors_tab);
     layout->setSpacing(0);
