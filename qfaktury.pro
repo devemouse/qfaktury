@@ -5,7 +5,7 @@ TEMPLATE = app
 TARGET = qfaktury
 DEPENDPATH += .
 INCLUDEPATH += .
-QT += gui xml xmlpatterns
+QT += gui xml xmlpatterns sql
 CONFIG += debug
 
 # Input
@@ -45,7 +45,8 @@ HEADERS += ./src/XmlDataLayer.h \
     src/CustomTableView.h \
     src/FilterAwareTableModel.h \
     src/WidgetProxyModel.h \
-    src/TextFilterProxyModel.h
+    src/TextFilterProxyModel.h \
+    src/DatabaseManager.h
 FORMS += ./ui/CustomPaymentDialog.ui \
     ./ui/Faktura.ui \
     ./ui/Kontrahenci.ui \
@@ -89,7 +90,8 @@ SOURCES += ./src/XmlDataLayer.cpp \
     src/DateFilterProxyModelWidget.cpp \
     src/DateFilterProxyModel.cpp \
     src/CustomTableView.cpp \
-    src/TextFilterProxyModel.cpp
+    src/TextFilterProxyModel.cpp \
+    src/DatabaseManager.cpp
 RESOURCES += qfaktury.qrc
 MOC_DIR = .moc
 UI_DIR = .ui
@@ -112,6 +114,8 @@ INSTALLS += target \
     css \
     languages \
     desktop
+
+
 
 
 

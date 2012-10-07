@@ -7,6 +7,8 @@
 #include "ContractorsModel.h"
 #include "CustomTableView.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -37,10 +39,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    emit closingWindow();
+}
 
 void MainWindow::on_actionRun_old_MainWindow_triggered()
 {
+
     //run this in thread
     //QRect screen = QApplication::desktop()->screenGeometry();
    // old_MainWindow w(0);
