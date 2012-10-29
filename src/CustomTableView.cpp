@@ -39,3 +39,9 @@ void CustomTableView::addFilter(WidgetProxyModel *filter)
 
     ui->tableView->setModel(filter);
 }
+
+void CustomTableView::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    //create invoice editor
+
+}

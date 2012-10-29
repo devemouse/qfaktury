@@ -17,6 +17,9 @@ public:
     explicit CustomTableView(FilterAwareTableModel *model, QWidget *parent = 0);
     ~CustomTableView();
 
+private slots:
+    void on_tableView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::CustomTableView *ui;
     void addFilter(WidgetProxyModel* filter);
