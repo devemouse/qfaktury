@@ -1038,6 +1038,7 @@ void old_MainWindow::towaryEdycja() {
 /** Slot close
  */
 bool old_MainWindow::close() {
+    qDebug() << "close slot";
 	if (QMessageBox::question(this, trUtf8("Potwierdź"),
 	trUtf8("Czy chcesz wyjść z programu?"), QMessageBox::Yes | QMessageBox::No,
 			QMessageBox::Yes) == QMessageBox::Yes) {

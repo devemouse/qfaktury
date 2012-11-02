@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     old_w.show();
 #endif
 
-    connect(w, SIGNAL(closingWindow), old_w, SLOT(close))
+    a.connect(&w, SIGNAL(closingWindow), &old_w, SLOT(close));
 
     //if (a.arguments().contains("--nosplash")) {
 

@@ -15,6 +15,9 @@ public:
     explicit InvoiceEditorDialog(QWidget *parent = 0);
     ~InvoiceEditorDialog();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::InvoiceEditorDialog *ui;
 };

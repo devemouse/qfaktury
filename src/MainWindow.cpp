@@ -6,6 +6,7 @@
 #include "InvoicesModel.h"
 #include "ContractorsModel.h"
 #include "CustomTableView.h"
+#include "invoiceeditordialog.h"
 
 
 
@@ -41,11 +42,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qDebug() << "window closing...";
     emit closingWindow();
 }
 
 void MainWindow::on_actionRun_old_MainWindow_triggered()
 {
+    InvoiceEditorDialog *dialog = new InvoiceEditorDialog(this);
+    if (dialog->exec() != QDialog::Accepted)
+        qDebug() << "dialog not accepted";
+
 
     //run this in thread
     //QRect screen = QApplication::desktop()->screenGeometry();
